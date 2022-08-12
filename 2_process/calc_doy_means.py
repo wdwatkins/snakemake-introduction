@@ -23,7 +23,7 @@ def main(out_file, in_file, lake_id):
     calc_doy_means(df, lake_id, out_file)
 
 if __name__ == '__main__':
-    out_file = str(snakemake.output)
-    in_file = str(snakemake.input)
+    out_file = snakemake.output['out_file']
+    in_file = snakemake.input['in_file']
     lake_id = snakemake.wildcards['lake_id']
     main(out_file, in_file, lake_id)

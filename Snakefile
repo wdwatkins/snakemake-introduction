@@ -46,9 +46,9 @@ rule unzip_sb_data:
 
 rule calc_doy_means:
     input:
-        "1_fetch/out/tmp/pgdl_nhdhr_{lake_id}_temperatures.csv"
+        in_file = "1_fetch/out/tmp/pgdl_nhdhr_{lake_id}_temperatures.csv"
     output:
-        "2_process/out/doy_{lake_id}.csv"
+        out_file = "2_process/out/doy_{lake_id}.csv"
     script:
         "2_process/calc_doy_means.py"
     
