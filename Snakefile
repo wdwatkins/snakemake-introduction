@@ -1,7 +1,6 @@
 rule all:
     input:
-        "2_process/out/doy_120020150.csv",
-        "2_process/out/doy_107072210.csv"
+        "3_plot/out/doy_plot.png"
 
 rule get_sb_data:
     params:
@@ -52,5 +51,24 @@ rule calc_doy_means:
     script:
         "2_process/calc_doy_means.py"
     
+rule combine_site_files:
+    input:
+        "2_process/out/doy_120020150.csv",
+        "2_process/out/doy_107072210.csv",
+        "2_process/out/doy_120020979.csv"
+    output:
+        out_file = "2_process/out/combined_doy.csv"
+    script:
+        "2_process/combine_site_files.py"
+
+rule plot_doy_mean:
+    input:
+        in_file = '2_process/out/combined_doy.csv'
+    output:
+        out_file = '3_plot/out/doy_plot.png'
+    params:
+        depths = [0, 1, 2, 5, 10]
+    script:
+        "3_plot/plot_doy_mean.py"
 
 
